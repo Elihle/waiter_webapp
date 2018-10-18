@@ -14,7 +14,7 @@ if (process.env.DATABASE_URL && !local) {
     useSSL = true;
 }
 // which db connection to use
-const connectionString = process.env.DATABASE_URL || 'postgresql://coder:coder@localhost:5432/waiters';
+const connectionString = process.env.DATABASE_URL || 'postgresql://coder:coder@localhost:5432/waiters_webapp';
 
 const pool = new Pool({
     connectionString,
@@ -45,6 +45,9 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/', routes.home);
+app.get('/waiters/:username', routes.selectDays);
+app.post('/waiters/:username', routes.checkDays);
+app.get('/days', routes.displayDays)
 
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {
