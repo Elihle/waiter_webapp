@@ -1,3 +1,17 @@
 language: node_js
 node_js:
   - "v8.9.4"
+
+env:
+  - DATABASE_URL=postgresql://postgres@localhost:5432/waiters_webapp'
+
+node_js:  
+  - "8.9.4"
+
+before_script:
+  - psql -c 'create database waiters_webapp;' -U postgres
+  - psql -U postgres -d waiters_webapp -a -f table.sql
+
+addons:
+    apt:
+    packages:
