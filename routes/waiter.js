@@ -3,6 +3,8 @@ module.exports = function (services) {
         try {
             let waiters = await services.checkWaiter();
             let days = await services.checkDays();
+            console.log(waiters);
+            
             res.render('home', {waiters, days});
         } catch (err) {
             res.send(err.stack)
@@ -11,8 +13,18 @@ module.exports = function (services) {
 
     async function selectDays(req, res) {
         try {
-            res.render('home', {
+    
+            let name = req.params.name;
+            let waiters = await services.checkWaiter();
+            let days = await services.checkDays();
 
+            if (checkbox.checked=true) {
+                let selected = await services.insertInTable();
+            }
+
+            res.render('home', {
+                waiters,
+                days
             });
         } catch (err) {
             res.send(err.stack)

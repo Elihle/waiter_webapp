@@ -16,5 +16,11 @@ foreign key (waiter_id) references waiter (id),
 foreign key (weekday_id) references weekdays (id)
 );
 
-insert into waiter (waiter_name) VALUES ('Lihle');
-insert into weekdays (week_days) VALUES ('Monday');
+INSERT into weekdays (week_days) VALUES ('Monday');
+INSERT into weekdays (week_days) VALUES ('Tuesday');
+INSERT into weekdays (week_days) VALUES ('Wednesday');
+INSERT into weekdays (week_days) VALUES ('Thursday');
+INSERT into weekdays (week_days) VALUES ('Friday');
+INSERT into weekdays (week_days) VALUES ('Saturday');
+INSERT into weekdays (week_days) VALUES ('Sunday');
+

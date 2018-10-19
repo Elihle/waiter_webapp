@@ -1,9 +1,10 @@
+let assert = require('assert');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const Waiters = require('./services/waiter-avail');
-const Routes = require('./routes/waiter');
+const Waiters = require('../services/waiter-avail');
+const Routes = require('../routes/waiter');
 const pg = require("pg");
 const Pool = pg.Pool;
 
@@ -46,11 +47,28 @@ app.use(express.static('public'));
 
 describe('Waiter Availability', function () {
     beforeEach(async function () {
-        await pool.query('delete from waiter');
+        await pool.query('delete from shift');
     });
-    it('should return return 0', async function () {
-   
-        assert.strictEqual();
+
+    // it('should insert waiter name in database', async function () {
+    //     let waiter = Waiters(pool);
+    //     await waiter.insertUser('Lihle');
+    //     // let results = await waiter.selectName('Lihle')
+    //     let results = await waiter.selectName('Lihle');
+    //     assert.strictEqual(results.length, 1);
+    //     assert.strictEqual();
+    // });
+
+    it('should check selected weekdays', async function () {
+        let waiter = Waiters(pool);
+        await waiter.insertUser('Lihle');
+        let result = await waiter.selectName('Lihle');
+        let id = result[0].id
+        await waiter.insertShift(id, 3);
+        await waiter.insertShift(id, 6);
+
+        let results = await waiter.selectShift(id);
+        assert.strictEqual(results.length, 2);
     });
 
     after(function () {
