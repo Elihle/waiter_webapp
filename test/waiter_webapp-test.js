@@ -58,23 +58,23 @@ describe('Waiter Availability', function () {
     // it('should insert waiter name in database', async function () {
     //     let waiter = Waiters(pool);
     //     await waiter.insertUser('Lihle');
-    //     let results = await waiter.selectName('Lihle');
-    //     assert.strictEqual(results.length, 'Lihle');
+    //     let results = await waiter.checkDays(0);
+    //     assert.strictEqual(results.length, 0);
     //     assert.strictEqual();
     // });
 
-    // it('should check selected weekdays', async function () {
-    //     let waiter = Waiters(pool);
-    //     await waiter.insertUser('Lihle');
-    //     let result = await waiter.selectName('Lihle');
-    //     let id = result[0].id
-    //     await waiter.insertShift(id, 3);
-    //     await waiter.insertShift(id, 6);
-    //     await waiter.insertShift(id, 6);
+    it('should check selected weekdays', async function () {
+        let waiter = Waiters(pool);
+        await waiter.insertUser('Lihle');
+        let result = await waiter.selectName('Lihle');
+        let id = result[0].id
+        await waiter.insertShift(id, 3);
+        await waiter.insertShift(id, 6);
+        await waiter.insertShift(id, 6);
 
-    //     let results = await waiter.selectShift(id);
-    //     assert.strictEqual(results.length, 2);
-    // });
+        let results = await waiter.selectShift(id);
+        assert.strictEqual(results.length, 3);
+    });
 
     it('should check return 2 selected weeekdays', async function () {
         let waiter = Waiters(pool);
