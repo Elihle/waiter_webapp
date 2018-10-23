@@ -3,7 +3,7 @@ module.exports = function (services) {
         try {
             let waiters = await services.checkWaiter();
             let days = await services.checkDays();
-            console.log(waiters);
+            // console.log(waiters);
             
             res.render('home', {waiters, days});
         } catch (err) {
@@ -15,15 +15,19 @@ module.exports = function (services) {
         try {
     
             let name = req.params.name;
-            let waiters = await services.checkWaiter();
-            let days = await services.checkDays();
+            let days = req.params.days;
 
-            if (checkbox.checked=true) {
-                let selected = await services.insertInTable();
+            await services.selectName(name);
+            await services.selectDay(days);
+            
+            console.log(name);
+            
+            if (days.checked==true) {
+                alert ('Hello');
             }
 
             res.render('home', {
-                waiters,
+                name,
                 days
             });
         } catch (err) {

@@ -35,8 +35,8 @@ module.exports = function Waiters(pool) {
     }
 
     async function selectShift(id) {
-       let result = await pool.query('SELECT * FROM shift WHERE waiter_id = $1', [id]);
-       return result.rows;
+        let result = await pool.query('SELECT * FROM shift WHERE waiter_id = $1', [id]);
+        return result.rows;
     }
 
     return {
