@@ -23,4 +23,3 @@ INSERT into weekdays (week_days) VALUES ('Thursday');
 INSERT into weekdays (week_days) VALUES ('Friday');
 INSERT into weekdays (week_days) VALUES ('Saturday');
 INSERT into weekdays (week_days) VALUES ('Sunday');
-

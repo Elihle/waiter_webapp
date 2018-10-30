@@ -49,16 +49,16 @@ describe('Waiter Availability', function () {
     beforeEach(async function () {
         await pool.query('delete from shift');
     });
-    it('should return nothing if no day is selected', async function () {
-        let waiter = Waiters(pool);
-        let results = await waiter.checkDays();
-        assert.equal(results, 0);
-    });
+    // it('should return nothing if no day is selected', async function () {
+    //     let waiter = Waiters(pool);
+    //     let results = await waiter.checkDays();
+    //     assert.equal(results, 0);
+    // });
 
     // it('should insert waiter name in database', async function () {
     //     let waiter = Waiters(pool);
     //     await waiter.insertUser('Lihle');
-    //     let results = await waiter.checkDays(0);
+    //     let results = await waiter.checkDays();
     //     assert.strictEqual(results.length, 0);
     //     assert.strictEqual();
     // });

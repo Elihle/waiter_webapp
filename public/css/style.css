@@ -128,14 +128,19 @@ fieldset {
   background-color: #FCFDFD;
   color: #7F8C9A;
   width: 100%;
-  bottom:0;
+  bottom: 0;
   padding: 2em;
   border: 5px groove;
 
 }
 
-.header h5{
-  text-align: center; 
+.header h5 {
+  text-align: center;
   color: white;
-  
+
+}
+
+.buttons btn {
+  align-content: center;
+  margin-left: 10em;
 }
