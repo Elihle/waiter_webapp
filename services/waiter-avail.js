@@ -25,18 +25,22 @@ module.exports = function Waiters(pool) {
     }
 
     async function checkShifts() {
-        let result = await pool.query('SELECT * FROM shifts');
+        let result = await pool.query('SELECT * FROM weekdays WHERE week_days =$1', [day]);
         return result.rows;
     }
 
     async function insertShift(nameId, dayId) {
         await pool.query('INSERT INTO shift (waiter_id, weekday_id) values ($1, $2)', [nameId, dayId]);
-
     }
 
     async function selectShift(id) {
         let result = await pool.query('SELECT * FROM shift WHERE waiter_id = $1', [id]);
         return result.rows;
+    }
+
+    async function insertWaiterShift(name, shift) {
+        let check = Array.isArray(shift);
+        let selected = await selectDays(name, shift);
     }
 
     return {
@@ -47,6 +51,7 @@ module.exports = function Waiters(pool) {
         selectDay,
         checkShifts,
         insertShift,
-        selectShift
+        selectShift,
+        insertWaiterShift
     }
 }

@@ -7,85 +7,17 @@
 
 <fieldset>
     <div class="row checkboxes">
-        <form action="/waiters/:username" method="GET">
-            <div class="col-md-12" onchange="selectDays()">
-                <p><input type="checkbox" name="day" id="day1" /><label for="day1"><span class="ui"></span><b>Monday</b></label></p>
-                <p><input type="checkbox" name="day" id="day2" /><label for="day2"><span class="ui"></span><b>Tuesday</b></label></p>
-                <p><input type="checkbox" name="day" id="day3" /><label for="day3"><span class="ui"></span><b>Wednesday</b></label></p>
-                <p><input type="checkbox" name="day" id="day4" /><label for="day4"><span class="ui"></span><b>Thursday</b></label></p>
-                <p><input type="checkbox" name="day" id="day5" /><label for="day5"><span class="ui"></span><b>Friday</b></label></p>
-                <p><input type="checkbox" name="day" id="day6" /><label for="day6"><span class="ui"></span><b>Saturday</b></label></p>
-                <p><input type="checkbox" name="day" id="day7" /><label for="day7"><span class="ui"></span><b>Sunday</b></label></p>
-                {{!-- <button class="btn btn-success" type="submit"><b>Submit</b></button>
-                <button class="btn btn-warning" type="submit"><b>Shift days</b></button> --}}
+        <form method="POST">
+            <div class="col-md-12">
+                {{#each days}}
+                <p><input type="checkbox" name="day" value="{{week_days}}" id="day{{id}}" /><label for="day{{id}}"><span class="ui"></span><b>{{week_days}}</b></label></p>
+                {{/each}}
+                <button class="btn btn-success" type="submit"><b>Submit</b></button>
+                <button class="btn btn-warning" type="submit"><b>Shifts</b></button>
 </fieldset>
-<div class="row buttons">
-    <div class="col-md-12">
-        <button class="btn btn-success" type="submit"><b>Submit</b></button>
-        <button class="btn btn-warning" type="submit"><b>Shifts</b></button>
-    </div>
 
 </div>
 
 </form>
 </div>
 </div>
-
-
-{{!--
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" href="/css/days.css">
-        <link rel="stylesheet" href="/css/days.css"> -->
-</head>
-
-<body>
-    <div class="container">
-        <div class="row">
-            <h3>DAYS TO WORK</h3>
-            <form class="form-group  jumbotron-fluid" method="post" action="">
-                <ul>
-                    <li>{{username}}</li>
-                </ul>
-
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="days" value="Monday" {{#if monday}} checked {{/if}}>Monday<br>
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="days" value="Tuesday" {{#if tuesday}} checked {{/if}}>Tuesday <br>
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="days" value="Wednesday" {{#if wednesday}} checked {{/if}}>Wednesday
-                    <br>
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="days" value="Thursday" {{#if thursday}} checked {{/if}}>Thursday <br>
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="days" value="Friday" {{#if friday}} checked {{/if}}>Friday<br>
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="days" value="Saturday" {{#if saturday}} checked {{/if}}>Saturday<br>
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="days" value="Sunday" {{#if sunday}} checked {{/if}}>Sunday
-                </label>
-                <br></br>
-                <button type="submit" class="btn btn-primary" id="button">SUBMIT</button>
-            </form>
-            <br>
-            <form class="" method="get" action="/logout">
-                <button type="submit" class="btn btn-primary">LOGOUT</button>
-                <!-- </div> -->
-            </form>
-            <br>
-            <p>{{output}}</p>
-            <p>{{informText}}</p>
-        </div>
-    </div>
-</body> --}}

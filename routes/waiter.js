@@ -16,19 +16,8 @@ module.exports = function (services) {
 
     async function selectDays(req, res) {
         try {
-
-            let name = req.params.name;
-            let days = req.params.days;
-
-            await services.selectName(name);
-            await services.selectDay(days);
-
-            console.log(name);
-
-            if (days.checked == true) {
-                alert('Hello');
-            }
-
+            let name = req.params.username;
+            let days = await services.checkDays();
             res.render('home', {
                 name,
                 days
@@ -38,22 +27,18 @@ module.exports = function (services) {
         }
     }
 
-
     async function checkDays(req, res) {
         try {
-            res.redirect('/');
+            let name = req.params.username;
+            let days = await services.checkDays();
+            res.render('home', {
+                days,
+                name
+            });
         } catch (err) {
             res.send(err, stack)
         }
     }
-
-    // async function displayDay(req,res) {
-    //     try {
-    //         res.redirect('/');
-    //     } catch {
-    //         res.send(err, stack);
-    //     }
-    // }
 
     async function displayDays(req, res) {
         try {
