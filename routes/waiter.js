@@ -40,28 +40,32 @@ module.exports = function (services) {
         }
     }
 
-    async function displayDays(req, res) {
+    async function insertShift(req, res) {
         try {
-            res.redirect('/', {
+            let name = req.params.username;
+            let shiftDays = req.body.day;
+            let selected = await services.insertWaiterShift(name, shiftDays);
+            let days = await services.checkDays();
+            if (selected) {
+                req.flash('added', 'Successfully added');
+            } else {
+                req.flash('notAdded', 'Please select dayyy');
+            }
 
+            res.render('home', {
+                name,
+                days
             });
         } catch (err) {
-            res.send(err, stack)
+            res.send(err.stack)
+
         }
     }
-
-    // async function checked () {
-    //     try {
-    //         res.redirect('/')
-    //     } catch (err, stack){
-
-    //     }
-    // }
 
     return {
         home,
         selectDays,
         checkDays,
-        displayDays
+        insertShift
     }
 }
