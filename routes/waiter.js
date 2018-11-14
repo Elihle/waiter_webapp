@@ -58,10 +58,10 @@ module.exports = function (services) {
         }
     }
 
-    async function findPerDay() {
+    async function findPerDay(req, res) {
         try {
             await services.findEachDay();
-            res.render('/days')
+            res.render('days')
 
         } catch (err) {
             res.send(err.stack)

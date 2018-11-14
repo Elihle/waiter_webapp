@@ -1,5 +1,7 @@
 <form action="/days" method="GET">
-    <table>
+
+    <table class="shiftTable">
+        <h1>Shifts Timetable</h1>
         <tr>
             {{#each weekdays}}
             <th>
@@ -7,7 +9,7 @@
             </th>
             {{/each}}
         </tr>
-        
+
         <tr>
             <td>
                 <ul>

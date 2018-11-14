@@ -23,6 +23,7 @@ module.exports = function Waiters(pool) {
         return result.rows;
     }
 
+
     async function selectDay(day) {
         let result = await pool.query('SELECT * FROM weekdays WHERE week_days = $1', [day]);
         return result.rows;
@@ -41,9 +42,18 @@ module.exports = function Waiters(pool) {
         let result = await pool.query('SELECT * FROM shift WHERE waiter_id = $1', [id]);
         return result.rows;
     }
+    async function selectDayShifts(id) {
+        let result = await pool.query('SELECT * FROM shift WHERE weekday_id = $1', [id]);
+        return result.rows;
+    }
 
     async function selectDayId(id) {
-        let result = await pool.query('SELECT id from weekdays WHERE week_days= $1', [id]);
+        let result = await pool.query('SELECT * from weekdays WHERE week_days= $1', [id]);
+        return result.rows;
+    }
+
+    async function selectNameId(id) {
+        let result = await pool.query('SELECT * from waiter WHERE id= $1', [id]);
         return result.rows;
     }
 
@@ -99,18 +109,70 @@ module.exports = function Waiters(pool) {
                 for (const current of selectedDays) {
                     if (day.id === current.weekday_id) {
                         day.checked = 'checked';
-
                     }
                 }
             }
         }
-        console.log(days);
+        // console.log(days);
         return days;
     }
 
     async function findEachDay() {
         let result = await pool.query('SELECT waiter_name, week_days FROM weekdays JOIN shift on weekdays.id = shift.weekday_id JOIN waiter on shift.waiter_id = waiter.id');
-        return result.rows;
+        let shiftEntries = [{
+                id: 1,
+                week_days: "Monday",
+                shift: [],
+            },
+            {
+                id: 2,
+                week_days: "Tuesday",
+                shift: [],
+            },
+            {
+                id: 3,
+                week_days: "Wednesday",
+                shift: [],
+            },
+            {
+                id: 4,
+                week_days: "Thursday",
+                shift: [],
+            },
+            {
+                id: 5,
+                week_days: "Friday",
+                shift: [],
+            },
+            {
+                id: 6,
+                week_days: "Saturday",
+                shift: [],
+            },
+            {
+                id: 7,
+                week_days: "Sunday",
+                shift: [],
+            }
+        ];
+
+        for (let i = 0; i < shiftEntries.length; i++) {
+            let day = shiftEntries[i].week_days;
+            let dayShifts = await selectDayShifts(shiftEntries[i].id)
+
+            for (let j = 0; j < dayShifts.length; j++) {
+                console.log(dayShifts);
+                let dayData = await selectNameId(dayShifts[j].waiter_id);
+                console.log(dayData);
+
+                shiftEntries[i].shift.push(dayData[0].waiter_name)
+
+
+            }
+        }
+        console.log(shiftEntries);
+
+        return shiftEntries;
     }
 
     return {
