@@ -166,8 +166,6 @@ module.exports = function Waiters(pool) {
                 console.log(dayData);
 
                 shiftEntries[i].shift.push(dayData[0].waiter_name)
-
-
             }
         }
         console.log(shiftEntries);
