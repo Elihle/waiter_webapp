@@ -32,7 +32,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
 // handlebars
 app.engine('handlebars', exphbs({
     defaultLayout: 'main'
@@ -49,7 +48,7 @@ app.use(express.static('public'));
 app.get('/', routes.home);
 app.get('/waiters/:username', routes.selectDays);
 app.post('/waiters/:username', routes.insertShift);
-// app.get('/days', routes.displayDays)
+app.get('/days', routes.findPerDay);
 
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {

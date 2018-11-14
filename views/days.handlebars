@@ -1,0 +1,21 @@
+<form action="/days" method="GET">
+    <table>
+        <tr>
+            {{#each weekdays}}
+            <th>
+                {{week_days}}
+            </th>
+            {{/each}}
+        </tr>
+        
+        <tr>
+            <td>
+                <ul>
+                    {{#each waiter}}
+                    {{waiter_name}}
+                    {{/each}}
+                </ul>
+            </td>
+        </tr>
+    </table>
+</form>

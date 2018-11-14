@@ -3,7 +3,6 @@ module.exports = function (services) {
         try {
             let waiters = await services.checkWaiter();
             let days = await services.checkDays();
-            // console.log(waiters);
 
             res.render('home', {
                 waiters,
@@ -17,7 +16,7 @@ module.exports = function (services) {
     async function selectDays(req, res) {
         try {
             let name = req.params.username;
-            let days = await services.checkDays();
+            let days = await services.findShift(name)
             res.render('home', {
                 name,
                 days
@@ -45,20 +44,27 @@ module.exports = function (services) {
             let name = req.params.username;
             let shiftDays = req.body.day;
             let selected = await services.insertWaiterShift(name, shiftDays);
-            let days = await services.checkDays();
+            // let days = await services.checkDays();
             if (selected) {
                 req.flash('added', 'Successfully added');
             } else {
-                req.flash('notAdded', 'Please select dayyy');
+                req.flash('notAdded', 'Please select day');
             }
 
-            res.render('home', {
-                name,
-                days
-            });
+            res.redirect('/waiters/' + name);
         } catch (err) {
             res.send(err.stack)
 
+        }
+    }
+
+    async function findPerDay() {
+        try {
+            await services.findEachDay();
+            res.render('/days')
+
+        } catch (err) {
+            res.send(err.stack)
         }
     }
 
@@ -66,6 +72,7 @@ module.exports = function (services) {
         home,
         selectDays,
         checkDays,
-        insertShift
+        insertShift,
+        findPerDay
     }
 }

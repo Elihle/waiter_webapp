@@ -6,24 +6,25 @@
 </div>
 
 <fieldset>
+    <div class="flash-msg">
+        <span class="entry">{{messages.added}}</span>
+        <span class="entry">{{messages.notAdded}}</span>
+    </div>
+
     <div class="row checkboxes">
         <form method="POST">
             <div class="col-md-12">
                 {{#each days}}
-                <p><input type="checkbox" name="day" value="{{week_days}}" id="day{{id}}" /><label for="day{{id}}"><span class="ui"></span><b>{{week_days}}</b></label></p>
+                <p><input type="checkbox" name="day" value="{{week_days}}" id="day{{id}}" {{checked}} /><label for="day{{id}}"><span
+                            class="ui"></span><b>{{week_days}}</b></label></p>
                 {{/each}}
                 <button class="btn btn-success" type="submit"><b>Submit</b></button>
-                <button class="btn btn-warning" type="submit"><b>Shifts</b></button>
+                <button class="btn btn-warning" type="submit" href="/days"><b>Shifts</b></button>
 </fieldset>
 
 </div>
 
 </form>
-</div>
-
-<div class="flash-msg">
-      <span class="entry">{{messages.added}}</span>
-      <span class="entry">{{messages.notAdded}}</span>
 </div>
 
 </div>

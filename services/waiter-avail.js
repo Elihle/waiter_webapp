@@ -11,11 +11,15 @@ module.exports = function Waiters(pool) {
 
     async function insertUser(name) {
         await pool.query('INSERT INTO waiter (waiter_name) values ($1)', [name]);
-
     }
 
     async function selectName(username) {
         let result = await pool.query('SELECT * FROM waiter WHERE waiter_name = $1', [username]);
+        if (result.rowCount === 0) {
+            await insertUser(username);
+            let checkName = await pool.query('SELECT * FROM waiter WHERE waiter_name = $1', [username]);
+            return checkName.rows;
+        }
         return result.rows;
     }
 
@@ -49,7 +53,6 @@ module.exports = function Waiters(pool) {
     }
 
     async function insertWaiterShift(name, shift) {
-
         let check = Array.isArray(shift);
         let checkName = await selectName(name);
         let nameLength = checkName.length;
@@ -83,6 +86,33 @@ module.exports = function Waiters(pool) {
 
     }
 
+    async function findShift(username) {
+        let days = await checkDays();
+        let findUser = await selectName(username);
+        const {
+            id
+        } = findUser[0];
+        if (id > 0) {
+
+            let selectedDays = await selectShift(id);
+            for (const day of days) {
+                for (const current of selectedDays) {
+                    if (day.id === current.weekday_id) {
+                        day.checked = 'checked';
+
+                    }
+                }
+            }
+        }
+        console.log(days);
+        return days;
+    }
+
+    async function findEachDay() {
+        let result = await pool.query('SELECT waiter_name, week_days FROM weekdays JOIN shift on weekdays.id = shift.weekday_id JOIN waiter on shift.waiter_id = waiter.id');
+        return result.rows;
+    }
+
     return {
         checkWaiter,
         checkDays,
@@ -94,6 +124,8 @@ module.exports = function Waiters(pool) {
         selectShift,
         deleteShifts,
         selectDayId,
-        insertWaiterShift
+        insertWaiterShift,
+        findShift,
+        findEachDay
     }
 }

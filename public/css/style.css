@@ -144,3 +144,7 @@ fieldset {
   align-content: center;
   margin-left: 10em;
 }
+
+.entry {
+  color: red;
+}
