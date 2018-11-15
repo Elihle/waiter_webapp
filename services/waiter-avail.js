@@ -157,19 +157,16 @@ module.exports = function Waiters(pool) {
         ];
 
         for (let i = 0; i < shiftEntries.length; i++) {
-            let day = shiftEntries[i].week_days;
+            // let day = shiftEntries[i].week_days;
             let dayShifts = await selectDayShifts(shiftEntries[i].id)
-
             for (let j = 0; j < dayShifts.length; j++) {
                 console.log(dayShifts);
                 let dayData = await selectNameId(dayShifts[j].waiter_id);
                 console.log(dayData);
-
                 shiftEntries[i].shift.push(dayData[0].waiter_name)
             }
         }
         console.log(shiftEntries);
-
         return shiftEntries;
     }
 

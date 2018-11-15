@@ -1,4 +1,4 @@
-<form action="/days" method="GET">
+{{!-- <form action="/days" method="GET"> --}}
 
     <table class="shiftTable">
         <h1>Shifts Timetable</h1>
@@ -14,10 +14,11 @@
             <td>
                 <ul>
                     {{#each waiter}}
-                    {{waiter_name}}
+                    {{this}}
                     {{/each}}
                 </ul>
             </td>
         </tr>
     </table>
-</form>
+{{!-- </form> --}}
+

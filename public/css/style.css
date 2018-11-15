@@ -147,8 +147,12 @@ fieldset {
 
 .entry {
   color: red;
+  margin: 25em;
 }
 
 .shiftTable {
   background-color: white;
+  width : 100%;
+  color: red;
+  height: 20em;
 }
